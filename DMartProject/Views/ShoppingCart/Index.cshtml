@@ -4,8 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Cart</h1>
-
+<h1>Index</h1>
 <table class="table">
     <thead>
         <tr>
@@ -20,6 +19,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CustomerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
             </th>
             <th></th>
         </tr>
@@ -40,7 +42,10 @@
                 @Html.DisplayFor(modelItem => item.CustomerId)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+               
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>

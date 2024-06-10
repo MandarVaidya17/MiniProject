@@ -9,13 +9,14 @@ namespace ShopFarmProject.Controllers
     {
         private ApplicationDbContext db;
         ProductDAL dal;
-        ShoppingCartDAL scdal;
+        ShoppingCartDAL cdal;
 
         public ProductController(ApplicationDbContext db)
         {
 
             this.db = db;
             dal = new ProductDAL(this.db);
+            cdal=new ShoppingCartDAL(this.db);
         }
         // GET: ProductController
         public ActionResult Index()
@@ -30,13 +31,20 @@ namespace ShopFarmProject.Controllers
             return View(model);
         }
         
-        public ActionResult AddCart(ShoppingCart sc)
+        public ActionResult AddCart(ShoppingCart sc, int id )
         {
-            
-            
-                return RedirectToAction("Index", "ShoppingCart");
-            
-           
+
+            int result = cdal.AddProduct(sc,id);
+            if (result >= 1)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                ViewBag.ErrorMsg = "Something went wrong";
+                return View();
+            }
+
         }
         // GET: ProductController/Details/5
         public ActionResult Details(int id)

@@ -1,4 +1,5 @@
 ﻿using ShopFarmProject.Data;
+using System.Linq;
 
 namespace ShopFarmProject.Models
 {
@@ -12,45 +13,30 @@ namespace ShopFarmProject.Models
 
         public List<ShoppingCart> GetProducts()
         {
-            var model = (from sc in db.ShoppingCarts
-                         select sc).ToList();
+            var model = (from product in db.ShoppingCarts
+                         select product).ToList();
             return model;
         }
-
-        public int AddProduct(ShoppingCart sc,int id)
+        public int AddProduct(ShoppingCart cart,int id)
         {
             int result = 0;
-            var pro = db.Products.ToList();
-            var cart = pro.Select(product => new ShoppingCart
+            var model = db.Products.Where(x => x.Id == id).SingleOrDefault();
+            var cid = db.Customers.Select(x => x.Id).SingleOrDefault();
+
+            var targetData = new ShoppingCart
             {
-                Name = product.Name,
-                Price = product.Price,
-                CustomerId = product.Id,
-                Image = product.Image
-            });
+              
+                Name=model.Name,
+                Price=model.Price,
+                CustomerId=model.Id,//customer id not get yet...this model get product id in cart
+                Image=model.Image
 
-            db.ShoppingCarts.AddRange(cart);
 
-                result = db.SaveChanges();
-
+            };
+            db.ShoppingCarts.Add(targetData);
+            db.SaveChanges();
             return result;
         }
 
-        public int EditProduct(Product product)
-        {
-            int result = 0;
-            var model = db.Products.Where(x => x.Id == product.Id).SingleOrDefault();
-            if (model != null)
-            {
-                model.Name = product.Name; // model will hold old data
-                model.Price = product.Price;
-                model.Image = product.Image;
-
-                result = db.SaveChanges();
-
-            }
-            return result;
-
-        }
     }
 }
