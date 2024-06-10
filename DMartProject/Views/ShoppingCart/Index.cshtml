@@ -41,9 +41,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CustomerId)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
+                <td>
+                    <img class="prod" src="/Images/@item.Image" alt="Product_Photo" width="50" height="50">
+                </td>
             <td>
                
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
