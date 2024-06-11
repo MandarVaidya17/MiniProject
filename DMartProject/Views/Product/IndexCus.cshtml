@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = "IndexCus";
 }
+@{
+    ViewData["Title"] = "AddCart";
+}
 <style>
     .tbody {
         background-color: lightpink
@@ -50,6 +53,10 @@
              </td>
             <td>
                 @Html.ActionLink("Add Cart", "AddCart", new {  id=item.Id }) 
+
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
                
             </td>
         </tr>

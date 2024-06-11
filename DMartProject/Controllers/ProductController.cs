@@ -30,14 +30,15 @@ namespace ShopFarmProject.Controllers
             var model = dal.GetProducts();
             return View(model);
         }
-        
-        public ActionResult AddCart(ShoppingCart sc, int id )
+       
+  
+        public ActionResult AddCart(ShoppingCart sc,int id )
         {
 
             int result = cdal.AddProduct(sc,id);
             if (result >= 1)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "ShoppingCart");
             }
             else
             {

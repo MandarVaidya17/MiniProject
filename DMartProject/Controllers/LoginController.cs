@@ -8,9 +8,11 @@ namespace ShopFarmProject.Controllers
     {
 
         private readonly ApplicationDbContext db;
+        
         public LoginController(ApplicationDbContext db)
         {
             this.db = db;
+            
         }
       
         public IActionResult Login()
@@ -26,10 +28,12 @@ namespace ShopFarmProject.Controllers
             if (emp != null)
             {
                 return RedirectToAction("Index", "Product");
+                
             }
             else if(cus!=null)
             {
                 return RedirectToAction("IndexCus", "Product");
+                
             }
             else
             {
